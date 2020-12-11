@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-md-5 col-lg-5 col-xl-5"></div>
+        <div class="col-sm-4 col-md-2 col-lg-2 col-xl-2 pt-4">
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" autocomplete="off">
+                <div class="login-label"><span class="login-content">LOG IN</span></div>
+                <input id="userName" formControlName="userName" placeholder="Username" type="text" class="form-control" required />
+                <div *ngIf="isFormError" class="text-danger font-weight-bold error-msg">Please enter user name</div><br/>
+                <button name="submit">SIGN IN</button>
+            </form>
+        </div>
+        <div class="col-sm-4 col-md-5 col-lg-5 col-xl-5"></div>
+    </div>
+</div>
