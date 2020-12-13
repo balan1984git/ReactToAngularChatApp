@@ -1,6 +1,6 @@
 .login-label {
     border-bottom: 1px solid grey;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
     .login-content {
         position: relative;
@@ -13,12 +13,6 @@
         text-transform: uppercase;
         font-family: sans-serif;
     }
-}
-
-input {
-    border: none;
-    border-bottom: 1px solid red;
-    border-radius: 0px;
 }
 
 button {
@@ -38,7 +32,77 @@ button:focus {
 }
 
 .error-msg {
-    font-size: 13px;
+    font-size: 12px;
     margin:0 !important;
     padding:0 !important
+}
+
+form {
+  width: 180px;
+
+  form label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transition: 0.2s;
+  }
+
+  input {
+    border:none;
+    width: 200px;
+    height: 50px;  
+    cursor:auto;
+    border-bottom: 1px solid red !important;
+    font-size: 13px;
+    width: 180px;
+    height: 40px;
+    }
+
+  input:focus {
+    border: none;
+    border-bottom: 2px solid red !important;
+    outline: none !important;
+    }
+
+  input:focus + label {
+    top: 100%;
+    margin-top: -36px;
+  }
+
+  input:focus ~ .floating-label,
+  input:not(:focus):valid ~ .floating-label{
+    top: -9px;
+    left: 1px;
+    color: #7833FF;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 1;
+    line-height: 12px;
+}
+
+.floating-label {
+  color: grey;
+  position: absolute;
+  pointer-events: none;
+  left: 0px;
+  top: 7px;
+  opacity: 0.7;
+  font-weight: lighter;
+  transition: 0.2s ease all;
+}
+
+  div {
+    position: relative;
+
+    label {
+      position: absolute;
+    }
+  }
+}
+
+
+:disabled {
+  cursor: not-allowed;
 }

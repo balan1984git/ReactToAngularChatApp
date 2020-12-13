@@ -27,8 +27,7 @@ export class ChatComponent implements OnInit {
     private chatService: ChatService) {
   }
 
-  ngOnInit() {
-    this.isLoading = false;
+  ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(user => {
       this.currentUserName = user.userName;
       this.user = {
@@ -51,14 +50,14 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  createChat(token) {
+  createChat(token): void {
     Twilio.Client.create(token).then((client: Client) => {
       this.chatClient = client;
       this.setupChatClient(this.chatClient);
     })
   }
 
-  setupChatClient(client) {
+  setupChatClient(client): void {
     this.chatClient = client;
     this.chatClient
       .getChannelByUniqueName('general2')
@@ -75,22 +74,18 @@ export class ChatComponent implements OnInit {
         return this.currentChannel.join().catch(() => { });
       })
       .then(() => {
-        this.currentChannel.getMessages().then(this.messagesLoaded);
-        this.currentChannel.on('messageAdded', this.messageAdded);
+        this.currentChannel.getMessages().then((messagePage) => this.messagesLoaded(messagePage));
+        this.currentChannel.on('messageAdded', (message) => this.messageAdded(message));
       })
   }
 
   messagesLoaded(messagePage): void {
-    //    this.isLoading = false;
-    this.messages = messagePage.items.map((message) => {
-      if (message) {
-        this.twilioMessageToKendoMessage(message.state);
-      }
-    });
+    this.isLoading = false;
+    this.messages = messagePage.items.map(this.twilioMessageToKendoMessage);
   }
 
-  messageAdded(message) {
-    //    this.isLoading = false;
+  messageAdded(message): void {
+    this.isLoading = false;
     this.messages = [...this.messages, this.twilioMessageToKendoMessage(message)];
   }
 
@@ -102,7 +97,7 @@ export class ChatComponent implements OnInit {
     };
   }
 
-  public sendMessage(event: SendMessageEvent): void {
+  sendMessage(event: SendMessageEvent): void {
     this.currentChannel.sendMessage(event.message.text);
   }
 }

@@ -1,5 +1,5 @@
-<p *ngIf="isLoading">Loading chat...</p>
+<p class="loadingMsg text-center mt-3" *ngIf="isLoading">Loading chat...</p>
 <p *ngIf="isLoadingChat">Could not load chat.</p>
 <div *ngIf="!isLoading">
-<kendo-chat [messages]="messages" [user]="user" (sendMessage)="sendMessage($event)" class="mt-3"></kendo-chat>
+    <kendo-chat [messages]="messages" [user]="user" (sendMessage)="sendMessage($event)" class="mt-3"></kendo-chat>
 </div>
